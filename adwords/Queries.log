@@ -1,0 +1,50 @@
+
+SQL*Loader: Release 11.1.0.7.0 - Production on Mon Nov 18 12:38:43 2013
+
+Copyright (c) 1982, 2007, Oracle.  All rights reserved.
+
+Control File:   Queries.ctl
+Data File:      Queries.dat
+  File processing option string: "str '
+'"
+  Bad File:     Queries.bad
+  Discard File:  none specified
+ 
+ (Allow all discards)
+
+Number to load: ALL
+Number to skip: 0
+Errors allowed: 50
+Bind array:     64 rows, maximum of 256000 bytes
+Continuation:    none specified
+Path used:      Conventional
+
+Table QUERIES, loaded from every logical record.
+Insert option in effect for this table: INSERT
+
+   Column Name                  Position   Len  Term Encl Datatype
+------------------------------ ---------- ----- ---- ---- ---------------------
+QID                                 FIRST     *  WHT      CHARACTER            
+QUERY                                NEXT   400  WHT      CHARACTER            
+
+
+Table QUERIES:
+  5000 Rows successfully loaded.
+  0 Rows not loaded due to data errors.
+  0 Rows not loaded because all WHEN clauses were failed.
+  0 Rows not loaded because all fields were null.
+
+
+Space allocated for bind array:                  42240 bytes(64 rows)
+Read   buffer bytes: 1048576
+
+Total logical records skipped:          0
+Total logical records read:          5000
+Total logical records rejected:         0
+Total logical records discarded:        0
+
+Run began on Mon Nov 18 12:38:43 2013
+Run ended on Mon Nov 18 12:38:47 2013
+
+Elapsed time was:     00:00:03.64
+CPU time was:         00:00:00.05

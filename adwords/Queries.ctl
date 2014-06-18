@@ -1,0 +1,8 @@
+LOAD DATA
+INFILE 'Queries.dat'  "str '\n'"
+INSERT INTO TABLE Queries
+FIELDS TERMINATED BY "\t" 
+(
+QID,
+QUERY CHAR(400)
+)
