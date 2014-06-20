@@ -1,0 +1,72 @@
+							Database Management Systems (COP 5725)
+						Individual Project Report: Advertising on the Web
+							Saranya Sadasivam (UFID: 8629-7969)
+
+
+Process of code development:
+----------------------------
+
+1) Planning and requirement study
+	a) The project document was studied thoroughly. 
+	b) The input and output file format requirements were thoroughly studied.
+	c) Piazza project forum was constantly monitored so as to be well informed about the changing project requirements.
+2) Analysis and design
+	a) The project document was thoroughly analyzed and any concerns or conflicts were immediately brought to the attention of the teaching assistants (TA). 
+	b) Process and data modeling at its preliminary stage was done. A high level data flow diagram and ER diagram were also designed. 
+3) Implementation
+	a) Oracle SQL Developer was installed in the local system.
+	b) The major processes such as tokenizing query, calculating similarity, etc. were implement first.
+4) Testing and maintenance
+	a) Unit testing was done for every code unit.
+	b) End to end testing was done:
+		- Using 5000 queries, average processing time = 3 minutes (on local database)
+		- Using 30000 queries, average processing time = 20 minutes (on local database)
+	c) Back up of the code was maintained and updated regularly using Dropbox.
+	
+	
+	
+Difficulties faced:
+-------------------
+
+1) To minimize the processing time by implementing the most optimized and efficient choice at every step. The following were the challenges in this respect:
+	a) To find an efficient way to load a data file into database.
+	b) To minimize the time taken to load a record from the Queries table.
+	c) To implement an optimized method of calculating similarity between keywords and query.
+2) To minimize the amount of interactions with the database i.e., reduce the total I/O cost for retrieving and processing data.
+3) To understand the project document and resolve conflicts and ambiguities.
+4) To handle the situation of mistakenly executing an infinite loop procedure over a weekend, which resulting in some rework as all the locked tables, procedures, functions, types, etc. were to be replicated with different names.
+5) To perform unit testing using an overloaded server.
+6) To perform end to end testing using an overloaded server.
+
+
+Solutions to the above mentioned difficulties:
+----------------------------------------------
+
+1) To minimize the processing time to load data into database,DIRECT PATH LOADS of SQL*loader was chosen due to the following:
+	a) It was chosen over executeUpdate of Java as it proved to be elegant and easy while being fast. 
+	b) It also out-performed the approach of using Java to write a SQL file containing insert statements and then loading the file using SQL*Plus.
+	c) Finally, it was faster than the approach Conventional path loads of SQL*loader.
+2) To minimize the time taken to query data from a huge table such as Queries table, the BULK COLLECT clause was used to collect up to 5000 records in one I/O.
+3) To implement an optimized way of calculating similarity between keywords and query, the BAG-OF-WORDS model is used along with computations using SPARSE MATRICES instead of the regular (non-sparse) one.
+	a) Using the Bag-of-words model, an indexed dictionary is created for all the keywords of all the advertisers during initialization. For each query, only those query tokens are processed which are found in this dictionary, thus reducing a lot of unnecessary processing steps.
+	b) Also, Sparse matrices are created, instead of the regular matrices, for each advertiser and query. Since words which do not occur either in the query or in the keyword list of any advertiser, get rejected initially itself, the sparse matrices formed are much smaller than the regular matrices, leading to faster processing.
+4) To minimize the amount of interactions with the database, BULK COLLECT clause is used along with loading and processing table type objects. Also, INDEXES are created on tables for faster fetching.
+	a) Since one query at a time gets processed, all the data required for that query is stored in table type objects. These are then modified and passed along the entire execution. This reduces the I/O cost by fetching the data only once per query instead of fetching it at each step for each query.
+	b) Indexes on Queries, Keywords, Advertisers tables help in fetching data faster.
+5) When project requirements were found ambiguous, the TAs were notified or asked for clarification.
+6) The infinite loop procedure lead to some code rework but CISE DBA was contacted to end the infinite loop execution process.
+7) The difficulty of unit testing and debugging on an overloaded server was bypassed by creating a local oracle database copy. Only the final version was run on the actual CISE server.
+8) End to end debugging and testing was also performed on the local oracle database and only the final version was run on the actual CISE server.
+
+Lessons learned:
+----------------
+
+1) Working of on-line advertisement algorithms such as greedy algorithm, balance algorithm and generalized balance algorithm
+2) Preliminary working of AdWords product of Google
+3) SQL constructs
+4) Query optimizations
+5) Efficient indexing
+6) PL/SQL coding constructs and code optimizations
+7) Oracle 11g features (along with features of older versions of Oracle DB) such as SQL*loader, BULK COLLECT clause, FORALL clause, REGEXP_SUBSTR, etc.
+8) Concept of Cosine similarity, its calulations and working with sparse matrices
+
